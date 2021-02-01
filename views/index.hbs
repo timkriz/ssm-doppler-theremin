@@ -1,0 +1,21 @@
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+
+<script src="/javascripts/sketch.js"></script>
+<script src="/javascripts/doppler.js"></script>
+<script src="/javascripts/theremin.js"></script>
+<script>
+
+    window.addEventListener('load', function() {
+        $("#turnPilotOff").css('background-color', '#A57473');
+        $("#thereminOff").css('background-color', '#A57473');
+        $("#gainOff").css('background-color', '#A57473');
+
+        window.doppler.init(function(bandwidth) {
+                var threshold = 5;
+                if (bandwidth.left > threshold || bandwidth.right > threshold) {
+                    if(oscillator && pilotIsOn) oscillator.frequency.setTargetAtTime(calculateFrequency(bandwidth), context.currentTime, 0.01);
+                }
+            }); 
+    });
+</script>
